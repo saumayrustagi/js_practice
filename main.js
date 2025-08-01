@@ -1,10 +1,13 @@
 "use strict";
 
+import imageUrl from "./assets/profile_flower.png";
+
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
-const imageUrl = "./assets/profile_flower.png";
 const image = new Image();
+image.src = imageUrl;
+
 let isImageLoaded = false;
 let imageCropData = {
 	sx: 0,
@@ -48,13 +51,11 @@ image.onerror = () => {
 	drawSquare();
 };
 
-image.src = imageUrl;
 
 function drawSquare() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 	if (isImageLoaded) {
-
 		ctx.drawImage(
 			image,
 			imageCropData.sx,
@@ -67,7 +68,6 @@ function drawSquare() {
 			square.height
 		);
 	} else {
-
 		ctx.fillStyle = 'lightgray';
 		ctx.fillRect(square.x, square.y, square.width, square.height);
 		ctx.fillStyle = 'black';
@@ -92,7 +92,6 @@ function handleMouseMove(e) {
 	if (isDragging) {
 		square.x = e.offsetX - dragOffsetX;
 		square.y = e.offsetY - dragOffsetY;
-
 
 		if (square.x + square.width > canvas.width) {
 			square.x = canvas.width - square.width;
